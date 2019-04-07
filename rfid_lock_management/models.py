@@ -142,6 +142,7 @@ class AccessTime(models.Model):
         Returns the HTML with link to /lockuser/the_id/ to display on the
         AccessTime change list page
         """
+        #lockuser_link_html = "<a href='../lockuser/%d/'>%s</a>" % (
         lockuser_link_html = "<a href='../lockuser/%d/'>%s</a>" % (
             self.lockuser.id, self.lockuser)
         return lockuser_link_html

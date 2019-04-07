@@ -1,7 +1,7 @@
 import os
 
-ONE_UP_SETTINGS_ROOT = os.path.dirname(
-    os.path.dirname(os.path.realpath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -70,7 +70,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(ONE_UP_SETTINGS_ROOT, 'static'),
+    os.path.join(BASE_DIR, 'static'),
 )
 
 # List of finder classes that know how to find static files in
@@ -91,15 +91,15 @@ TEMPLATE_LOADERS = (
     #     'django.template.loaders.eggs.Loader',
 )
 
-MIDDLEWARE_CLASSES = (
-    'django.middleware.common.CommonMiddleware',
+MIDDLEWARE = (
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    # Uncomment the next line for simple clickjacking protection:
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = 'proj_rfid_lock_management.urls'
@@ -107,13 +107,29 @@ ROOT_URLCONF = 'proj_rfid_lock_management.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'proj_rfid_lock_management.wsgi.application'
 
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates"
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    os.path.join(ONE_UP_SETTINGS_ROOT, 'templates'),
-)
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'APP_DIRS': True,
+        'OPTIONS': {
+        'debug': True,
+        'context_processors': [
+                # Insert your TEMPLATE_CONTEXT_PROCESSORS here or use this
+                # list if you haven't customized them:
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.i18n',
+                'django.template.context_processors.media',
+                'django.template.context_processors.static',
+                'django.template.context_processors.tz',
+                'django.template.context_processors.request',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
 
+    }
+]
 INSTALLED_APPS = (
     'django.contrib.auth',   # for user authentication
     'django.contrib.contenttypes',  # for user authentication
@@ -131,7 +147,7 @@ INSTALLED_APPS = (
     'debug_toolbar',
     'django_extensions',
     #'chartit',
-    'gunicorn'
+    #'gunicorn'
 )
 
 
@@ -168,7 +184,6 @@ LOGGING = {
 
 # To access request variable in templates
 # TEMPLATE_CONTEXT_PROCESSORS = TCP + (
-#     'django.core.context_processors.request',
 #     'django.contrib.messages.context_processors.messages',
 # )
 

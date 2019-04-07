@@ -1,6 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 import rfid_lock_management.models
 from datetime import datetime
 import json
@@ -36,8 +36,7 @@ def chartify(request):
             one_series['data'].append(json.loads(at.data_point))
         all_series.append(one_series)
     extra_context = {'chart_data': json.dumps(all_series, indent="")}
-    return render_to_response('chart.html', dictionary=extra_context,
-                              context_instance=RequestContext(request))
+    return render(request, 'chart.html', extra_context)
 
 
 def get_allowed_rfids(request, doorid):
