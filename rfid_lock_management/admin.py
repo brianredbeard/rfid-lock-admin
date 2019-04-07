@@ -5,13 +5,16 @@ from rfid_lock_management.models import LockUser, AccessTime, RFIDkeycard, Door
 from termcolor import colored
 from django import forms
 from django.contrib import messages
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import HttpResponseRedirect
 
 
 class LockUserForm(ModelForm):
     class Meta:
         model = LockUser
+        fields = ['first_name', 'last_name', 'email', 'address',
+                'phone_number', 'birthdate', 'doors',
+                'deactivate_current_keycard', 'current_keycard_revoker']
 
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)

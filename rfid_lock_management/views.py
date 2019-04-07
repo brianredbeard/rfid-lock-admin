@@ -3,7 +3,7 @@ from django.template import RequestContext
 from django.shortcuts import render_to_response
 import rfid_lock_management.models
 from datetime import datetime
-from django.utils import simplejson
+import json
 from django.contrib.auth.decorators import login_required
 from rfid_lock_management.misc_helpers import get_arg_default
 from rfid_lock_management.models import *
@@ -12,7 +12,7 @@ from rfid_lock_management.models import *
 def do_json_resp(success, message):
     response_data = {'success': success,
                      'error_mess': message}
-    return HttpResponse(simplejson.dumps(response_data),
+    return HttpResponse(json.dumps(response_data),
                         content_type="application/json")
 
 
@@ -33,9 +33,9 @@ def chartify(request):
         this_door_access_times = AccessTime.objects.filter(door=door)
         one_series['data'] = []
         for at in this_door_access_times:
-            one_series['data'].append(simplejson.loads(at.data_point))
+            one_series['data'].append(json.loads(at.data_point))
         all_series.append(one_series)
-    extra_context = {'chart_data': simplejson.dumps(all_series, indent="")}
+    extra_context = {'chart_data': json.dumps(all_series, indent="")}
     return render_to_response('chart.html', dictionary=extra_context,
                               context_instance=RequestContext(request))
 
@@ -53,7 +53,7 @@ def get_allowed_rfids(request, doorid):
         alloweds = ""   # but still need to respond
 
     #to_json = {"doorid": int(doorid), "allowed_rfids": alloweds}
-    #return HttpResponse(simplejson.dumps(to_json), content_type='application/json')
+    #return HttpResponse(json.dumps(to_json), content_type='application/json')
     # We don't feel like making the arduino parse JSON, so let's just send a list
     # of numbers separated by spaces.
     return HttpResponse(' '.join(alloweds) + '\0')
@@ -128,7 +128,7 @@ def check(request, doorid, rfid):
                             at.lockuser.first_name, at.lockuser.last_name)
                         data_point_dict = {
                             'x': x_coord, 'y': y_coord, 'user': user_name}
-                        at.data_point = simplejson.dumps(data_point_dict)
+                        at.data_point = json.dumps(data_point_dict)
                         at.save()
 
     return HttpResponse(response)
@@ -158,7 +158,7 @@ def initiate_new_keycard_scan(request, lockuser_object_id):
         n.save()
         response_data = {'success': True, 'new_scan_pk': n.pk}
         # not do_json_resp, since response_data is different:
-        return HttpResponse(simplejson.dumps(response_data),
+        return HttpResponse(json.dumps(response_data),
                             content_type="application/json")
 
 
@@ -203,4 +203,4 @@ def finished_new_keycard_scan(request, new_scan_pk):
     new_scan.save()
     response_data = {'success': True, 'rfid': new_scan.rfid}
     # not do_json_resp, since response_data is different:
-    return HttpResponse(simplejson.dumps(response_data), content_type="application/json")
+    return HttpResponse(json.dumps(response_data), content_type="application/json")
