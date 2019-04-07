@@ -1,6 +1,4 @@
 import os
-# To access request variable in templates
-from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
 
 ONE_UP_SETTINGS_ROOT = os.path.dirname(
     os.path.dirname(os.path.realpath(__file__)))
@@ -171,10 +169,10 @@ LOGGING = {
 }
 
 # To access request variable in templates
-TEMPLATE_CONTEXT_PROCESSORS = TCP + (
-    'django.core.context_processors.request',
-    'django.contrib.messages.context_processors.messages',
-)
+# TEMPLATE_CONTEXT_PROCESSORS = TCP + (
+#     'django.core.context_processors.request',
+#     'django.contrib.messages.context_processors.messages',
+# )
 
 # for debug toolbar - requires that the requesting IP address be listed here
 INTERNAL_IPS = ('127.0.0.1', )
