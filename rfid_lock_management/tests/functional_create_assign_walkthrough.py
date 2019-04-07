@@ -56,9 +56,9 @@ class CreateLockUserAssignKeycardWalkthrough(LiveServerTestCase):
                         # delete file
                         os.remove(self.screenshots_dir)
                 except:
-                    print "Exception: ", str(sys.exc_info())
+                    print("Exception: ", str(sys.exc_info()))
             else:
-                print "not found: ", self.screenshots_dir
+                print("not found: ", self.screenshots_dir)
             os.makedirs(self.screenshots_dir)
 
     def tearDown(self):

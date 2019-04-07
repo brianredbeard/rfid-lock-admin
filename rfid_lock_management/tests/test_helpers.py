@@ -20,12 +20,12 @@ def t_info(mess_str, level=1):
     """
     if PRINT_INFO:
         if level == 1:
-            print colored("\n" + mess_str, "white", "on_green")
+            print(colored("\n" + mess_str, "white", "on_green"))
         elif level == 2:
-            print colored(mess_str, "green")
+            print(colored(mess_str, "green"))
         elif level == 3:
-            print colored(mess_str, "cyan")
+            print(colored(mess_str, "cyan"))
         elif level == 4:
-            print colored("\t" + mess_str, "blue")
+            print(colored("\t" + mess_str, "blue"))
         elif level == 5:
-            print colored("\t\t" + mess_str, "magenta")
+            print(colored("\t\t" + mess_str, "magenta"))
