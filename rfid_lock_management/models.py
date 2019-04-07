@@ -422,13 +422,13 @@ def create_testuser(app, created_models, verbosity, **kwargs):  # pragma: no cov
     try:
         auth_models.User.objects.get(username='superuser')
     except auth_models.User.DoesNotExist:
-        print '*' * 80
-        print 'Creating test user -- login: superuser, password: superuser'
-        print '*' * 80
+        print('*' * 80)
+        print('Creating test user -- login: superuser, password: superuser')
+        print('*' * 80)
         assert auth_models.User.objects.create_superuser(
             'superuser', 'x@x.com', 'superuser')
     else:
-        print 'Test user already exists.'
+        print('Test user already exists.')
 
 signals.post_syncdb.connect(
     create_testuser, sender=auth_models,
