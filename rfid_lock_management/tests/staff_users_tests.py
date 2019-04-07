@@ -3,7 +3,7 @@ from django.test import TestCase, LiveServerTestCase
 from django.test.client import Client
 from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
-from test_helpers import t_info
+from .test_helpers import t_info
 
 
 class StaffUserTests(TestCase):

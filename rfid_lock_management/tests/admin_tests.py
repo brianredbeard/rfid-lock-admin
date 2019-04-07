@@ -11,7 +11,7 @@ from rfid_lock_management.models import LockUser, AccessTime
 from rfid_lock_management.admin import LockUserAdmin, AccessTimeAdmin
 from django.contrib.admin.sites import AdminSite
 from django.http import HttpResponsePermanentRedirect
-from test_helpers import t_info
+from .test_helpers import t_info
 
 
 class LockUserAdminActionsTests(TestCase):

@@ -3,7 +3,7 @@ import simplejson
 from django.test import TestCase
 from django.test.client import Client
 from rfid_lock_management.models import NewKeycardScan, AccessTime
-from test_helpers import t_info
+from .test_helpers import t_info
 
 
 class LockCommunicationTests(TestCase):

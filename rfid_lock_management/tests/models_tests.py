@@ -6,7 +6,7 @@ from rfid_lock_management.models import *
 from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
 #from django.utils.timezone import utc
-from test_helpers import t_info
+from .test_helpers import t_info
 
 
 class DoorModelTests(TestCase):

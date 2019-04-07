@@ -7,7 +7,7 @@ from django.test import TestCase
 from django.test.client import Client
 from rfid_lock_management.views import get_allowed_rfids
 from rfid_lock_management.models import *
-from test_helpers import t_info
+from .test_helpers import t_info
 
 class ChartDataTests(TestCase):
     fixtures = ['initial.json']

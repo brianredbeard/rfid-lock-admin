@@ -2,7 +2,7 @@ from django.test import TestCase
 from rfid_lock_management.templatetags import custom_filters
 from django.contrib.contenttypes.models import ContentType
 from rfid_lock_management.models import RFIDkeycard, LockUser, Door
-from test_helpers import t_info
+from .test_helpers import t_info
 
 class TemplateTagsTests(TestCase):
 

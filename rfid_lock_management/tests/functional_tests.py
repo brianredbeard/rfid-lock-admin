@@ -8,7 +8,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin.sites import AdminSite
 from rfid_lock_management.admin import LockUserAdmin
 from rfid_lock_management.models import LockUser
-from test_helpers import t_info
+from .test_helpers import t_info
 
 
 class AccessTimeList(LiveServerTestCase):

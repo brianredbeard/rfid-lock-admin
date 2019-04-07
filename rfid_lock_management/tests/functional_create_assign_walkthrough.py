@@ -12,7 +12,7 @@ from django.contrib.auth.models import Permission
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.admin.sites import AdminSite
 
-from test_helpers import t_info
+from .test_helpers import t_info
 
 
 # Take screenshot at certain points -- useful for documentation walking through
